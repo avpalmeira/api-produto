@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  selector:
+    matchLabels:
+      service: mongodb
+  template:
+    metadata:
+      labels:
+        service: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:bionic
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: mongouser
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: mongopwd

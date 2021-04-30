@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      service: api
+  template:
+    metadata:
+      labels:
+        service: api
+    spec:
+      containers:
+        - name: api
+          image: avpalmeira/api-produto:1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGODB_URI
+              value: mongodb://mongouser:mongopwd@mongodb-service:27017/admin
